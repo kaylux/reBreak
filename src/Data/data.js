@@ -18,8 +18,7 @@ const VIDEO_DATA = {
   HEADING: "LATEST VIDEOS",
   HEADING2: "FEATURED",
   MAINVID: "f8WpEYucEds",
-  data,
-  data2
+
   
 };
 

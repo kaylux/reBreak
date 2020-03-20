@@ -1,11 +1,13 @@
 <script>
   export let videoData = {};
-  const { HEADING, HEADING2, SERVICE_LIST, MAINVID, data, data2 } = videoData;
+  const { HEADING, HEADING2, SERVICE_LIST, MAINVID } = videoData;
 
   import  { onMount  } from "svelte";
 
   var channelid = 'UCwIxn6d5t7gZvebnGUoWJ3A';
   var vid1;
+  var data;
+  var data2;
   var displayedvids = [ ];
   var vids = [ ];
   var vids2 = [ ];
