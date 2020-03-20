@@ -3,11 +3,16 @@
   const { HEADING, HEADING2, SERVICE_LIST, MAINVID } = videoData;
 
   import  { onMount  } from "svelte";
+  import lazySizes from 'lazysizes';
+import 'lazysizes/plugins/attrchange/ls.attrchange';
 
+  var key = 'AIzaSyC5UTeickpgiE_xSIXJqDZXMZ5rzq9Ty00';
+  var url = 'https://www.googleapis.com/youtube/v3/channels';
   var channelid = 'UCwIxn6d5t7gZvebnGUoWJ3A';
-  var vid1;
+  var mainVideo;
   var data;
-  var data2;
+  var data2;//most popular
+  var vid1;
   var displayedvids = [ ];
   var vids = [ ];
   var vids2 = [ ];
@@ -18,30 +23,35 @@
   var HeadingText = "LATEST VIDEOS";
 
 
+
  console.log(HEADING2);
 
 
+  var options = {
+    part: "snippet",
+    key: key,
+    id: channelid,
+    maxresults: 20
 
-
-  document.addEventListener('lazybeforeunveil', function(e){
-    console.log("lazy load init");
-});
+  };
   function changeHandler() {
 
- 
+    console.log("1");
     if(videoSelection == 0){
             videoSelection = "1";
       HeadingText = "MOST POPULAR";
 
+    console.log("2");
+
       for(var index = 0; index < 20; index++){
-    
-        if(data2.items[index].id.kind == 'youtube#channel'){
+        console.log("3");
+      if(data2.items[index].id.kind == 'youtube#channel'){
 
-
-          displayedvids = vids4;
+    console.log("4");
+        displayedvids = vids4;
    
     
-        }
+      }
       }
 
 
@@ -50,14 +60,15 @@
       videoSelection = 0;
       HeadingText = "LATEST VIDEOS";
       for(var index = 0; index < 20; index++){
-      
+          console.log("5");
         displayedvids = vids2;
       
 
       }
       videoSelection = "0";
+          console.log("6");
     }
-
+    console.log("7");
     document.querySelectorAll('.youtubebox').forEach(function(iframe) {
     iframe.contentWindow.location.reload();
 });
@@ -66,14 +77,15 @@
 
 
   onMount(async function(){
-    const response = await fetch('https://www.googleapis.com/youtube/v3/search?order=date&part=id&channelId=UCwIxn6d5t7gZvebnGUoWJ3A&maxResults=15&key=AIzaSyA-9s61JkXwiAuZE3yGSULCFJGzQIiJktQ');
-  
-    const response2 = await fetch('https://www.googleapis.com/youtube/v3/search?part=id&channelId=UCwIxn6d5t7gZvebnGUoWJ3A&key=AIzaSyA-9s61JkXwiAuZE3yGSULCFJGzQIiJktQ&maxResults=15&order=viewcount');
+    const response = await fetch('https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId=UCwIxn6d5t7gZvebnGUoWJ3A&maxResults=15&key=AIzaSyA-9s61JkXwiAuZE3yGSULCFJGzQIiJktQ');
+    const response2 = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCwIxn6d5t7gZvebnGUoWJ3A&key=AIzaSyA-9s61JkXwiAuZE3yGSULCFJGzQIiJktQ&maxResults=15&order=viewcount');
     data = await response.json();
     data2 = await response2.json();
     console.log(data);
     console.log(data2);
    
+
+    mainVideo = MAINVID;
     
     for(var index = 0; index < 15; index++){
         vids[index] = data.items[index].id.videoId;
@@ -99,15 +111,15 @@ vids2 = vids.filter(function(x){
    console.log(vids4);
 
    
+  
+ 
    
+
 
   
   });
 
-
-
-
-      
+ 
 </script>
 
 <!------------------------------------------->
@@ -115,19 +127,13 @@ vids2 = vids.filter(function(x){
 <!------------------------------------------->
 <section id="services" class="section">
 
-    <div class="facebooklike ">
-
-      <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Frebreaknews&width=450&layout=standard&action=like&size=small&share=true&height=35&appId=778425398911705" width="450" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
-    </div>
   <div class="container text-center">
         <h2 class="title">{HEADING2}</h2>
     
      <iframe class="lazyload" width="400" height="340"
-             data-src="https://www.youtube.com/embed/{MAINVID}">
-          </iframe>
+             data-src="https://www.youtube.com/embed/Fts0R_SkKnI">
+          </iframe>> 
     <br><br><br>
-
-
 
     <h2 class="title">{HeadingText}</h2>
     <label class="switch">
@@ -141,13 +147,10 @@ vids2 = vids.filter(function(x){
       <div class="youtubebox">
       {#each displayedvids as vid}
 
-      
-
-        <iframe class='lazyload' width="320" height="200"
+         <iframe class='lazyload' width="320" height="200"
             data-src="https://www.youtube.com/embed/{vid}">
          </iframe>
    
-    
       
       {/each}
       
@@ -157,18 +160,6 @@ vids2 = vids.filter(function(x){
 <!----------------STYLE----------------------->
 <!------------------------------------------->
 <style>
-
-  .facebooklike{
-    display:flex;
-  }
-  .facebooklike iframe{
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center; 
-  }
-
-
-
   .service-img {
     width: 200px;
     height: 200px;
@@ -275,65 +266,5 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-}
-
-.youtubebox{
-
-
-  object-fit: contain;
-}
-.youtube {
- 
-    width: 300px;
-    height: 200px;
-    background-color: #000;
-    object-fit: contain;
-    position: relative;
-  
-    overflow: hidden;
-    cursor: pointer;
-}
-.youtube img {
-   
-   object-fit: contain;
-    left: 0;
-    opacity: 0.7;
-}
-.youtube .play-button {
-    width: 90px;
-    height: 60px;
-    background-color: #333;
-    box-shadow: 0 0 30px rgba( 0,0,0,0.6 );
-    z-index: 1;
-    opacity: 0.8;
-    border-radius: 6px;
-}
-.youtube .play-button:before {
-    content: "";
-    border-style: solid;
-    border-width: 15px 0 15px 26.0px;
-    border-color: transparent transparent transparent #fff;
-}
-.youtube img,
-.youtube .play-button {
-    cursor: pointer;
-}
-.youtube img,
-.youtube iframe,
-.youtube .play-button,
-.youtube .play-button:before {
-    position: absolute;
-}
-.youtube .play-button,
-.youtube .play-button:before {
-    top: 50%;
-    left: 50%;
-    transform: translate3d( -50%, -50%, 0 );
-}
-.youtube iframe {
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
 }
 </style>
