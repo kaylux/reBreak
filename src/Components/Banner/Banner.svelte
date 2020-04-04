@@ -5,7 +5,7 @@
 <!------------------------------------------->
 <!----------------MARKUP----------------------->
 <!------------------------------------------->
-<section class="main-bgcolor2 light-color" id="banner">
+<section class="main-banner" id="banner">
   <div class="container">
     <div class="row">
       
@@ -13,7 +13,7 @@
 
       <div class="col" id="banner">
       <center>
-        <img src="images/rebreak.png" alt="" class=" center-block" />"
+        <img src="images/rebreak.png" alt="" class="img-fluid" />"
       </center>
       
       </div>
@@ -26,6 +26,8 @@
 <!----------------STYLE----------------------->
 <!------------------------------------------->
 <style>
+
+
   section {
     padding-top: 5%;
     z-index: 0;

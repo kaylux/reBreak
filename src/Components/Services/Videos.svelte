@@ -70,7 +70,7 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
       videoSelection = "0";
   
     }
-document.querySelectorAll('.youtubebox iframe').forEach(function(iframe) {
+    document.querySelectorAll('.youtubebox').forEach(function(iframe) {
     iframe.contentWindow.location.reload();
 });
   }
@@ -163,6 +163,7 @@ vids2 = vids.filter(function(x){
 <!----------------STYLE----------------------->
 <!------------------------------------------->
 <style>
+
   .service-img {
     width: 200px;
     height: 200px;
