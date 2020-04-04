@@ -36,40 +36,41 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
   };
   function changeHandler() {
 
-    console.log("1");
     if(videoSelection == 0){
             videoSelection = "1";
       HeadingText = "MOST POPULAR";
-
-    console.log("2");
-
-      for(var index = 0; index < 20; index++){
-        console.log("3");
-      if(data2.items[index].id.kind == 'youtube#channel'){
-
-    console.log("4");
-        displayedvids = vids4;
-   
+          for(var index = 0; index < data.items.length; index++){
+        vids3[index] = data2.items[index].id.videoId; 
     
-      }
+   }
+    console.log(vids3);
+    console.log(displayedvids);
+
+    
+      for(var index = 0; index < data2.items.length; index++){
+     
+      
+        displayedvids = vids3;
+        console.log(displayedvids);
+        
+   
       }
 
 
     }
     if(videoSelection == 1){
-      videoSelection = 0;
+      
       HeadingText = "LATEST VIDEOS";
       for(var index = 0; index < 20; index++){
-          console.log("5");
+      
         displayedvids = vids2;
       
 
       }
       videoSelection = "0";
-          console.log("6");
+  
     }
-    console.log("7");
-    document.querySelectorAll('.youtubebox').forEach(function(iframe) {
+document.querySelectorAll('.youtubebox iframe').forEach(function(iframe) {
     iframe.contentWindow.location.reload();
 });
   }
@@ -77,8 +78,9 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
 
 
   onMount(async function(){
-    const response = await fetch('https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId=UCwIxn6d5t7gZvebnGUoWJ3A&maxResults=15&key=AIzaSyA-9s61JkXwiAuZE3yGSULCFJGzQIiJktQ');
-    const response2 = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCwIxn6d5t7gZvebnGUoWJ3A&key=AIzaSyA-9s61JkXwiAuZE3yGSULCFJGzQIiJktQ&maxResults=15&order=viewcount');
+    const response = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=AIzaSyC5UTeickpgiE_xSIXJqDZXMZ5rzq9Ty00&maxResults=25&channelId=UCwIxn6d5t7gZvebnGUoWJ3A&order=date');
+      
+    const response2 = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=AIzaSyC5UTeickpgiE_xSIXJqDZXMZ5rzq9Ty00&maxResults=25&channelId=UCwIxn6d5t7gZvebnGUoWJ3A&order=viewcount');
     data = await response.json();
     data2 = await response2.json();
     console.log(data);
@@ -86,13 +88,15 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
    
 
     mainVideo = MAINVID;
-    
-    for(var index = 0; index < 15; index++){
-        vids[index] = data.items[index].id.videoId;
-        vids3[index] = data2.items[index].id.videoId;
-     
-   }
   
+    
+    for(var index = 0; index < data.items.length; index++){
+        vids[index] = data.items[index].id.videoId; 
+    
+   }
+   
+
+
 
 
 
@@ -130,11 +134,10 @@ vids2 = vids.filter(function(x){
   <div class="container text-center">
         <h2 class="title">{HEADING2}</h2>
     
-     <iframe class="lazyload" width="400" height="340"
+     <iframe class="mainvid" width="400" height="340"
              data-src="https://www.youtube.com/embed/Fts0R_SkKnI">
-          </iframe>> 
+          </iframe>
     <br><br><br>
-
     <h2 class="title">{HeadingText}</h2>
     <label class="switch">
   <input type="checkbox" on:change={changeHandler}>
@@ -147,8 +150,8 @@ vids2 = vids.filter(function(x){
       <div class="youtubebox">
       {#each displayedvids as vid}
 
-         <iframe class='lazyload' width="320" height="200"
-            data-src="https://www.youtube.com/embed/{vid}">
+         <iframe class='youtubebox' width="320" height="200"
+            src="https://www.youtube.com/embed/{vid}">
          </iframe>
    
       

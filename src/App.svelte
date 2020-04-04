@@ -12,7 +12,7 @@
 </script>
 
 <!-- Navbar -->
-<Navbar navlists={DATA.NAVBAR_DATA} header={DATA.HEADER} /> 
+
 <!-- Banner -->
 <Banner bannerData={DATA.BANNER_DATA} } />
 <!-- Youtube Data -->
