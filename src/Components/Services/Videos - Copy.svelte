@@ -122,12 +122,6 @@ vids2 = vids.filter(function(x){
 <section id="services" class="section">
 
   <div class="container text-center">
-        <h2 class="title">{HEADING2}</h2>
-    
-     <iframe class="mainvidbox" width="400" height="340"
-             src="https://www.youtube.com/embed/Fts0R_SkKnI">
-          </iframe>> 
-    <br><br><br>
 
     <h2 class="title">{HeadingText}</h2>
     <label class="switch">

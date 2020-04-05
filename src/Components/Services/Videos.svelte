@@ -52,6 +52,9 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
       
         displayedvids = vids3;
         console.log(displayedvids);
+        const frame = document.getElementById("youtubebox");
+
+frame.parentNode.replaceChild(frame.cloneNode(), frame);
         
    
       }
@@ -70,9 +73,7 @@ import 'lazysizes/plugins/attrchange/ls.attrchange';
       videoSelection = "0";
   
     }
-    document.querySelectorAll('.youtubebox').forEach(function(iframe) {
-    iframe.contentWindow.location.reload();
-});
+ 
   }
 
 
@@ -135,7 +136,7 @@ vids2 = vids.filter(function(x){
         <h2 class="title">{HEADING2}</h2>
     
      <iframe class="mainvid" width="400" height="340"
-             data-src="https://www.youtube.com/embed/Fts0R_SkKnI">
+             src="https://www.youtube.com/embed/Fts0R_SkKnI">
           </iframe>
     <br><br><br>
     <h2 class="title">{HeadingText}</h2>
@@ -147,7 +148,7 @@ vids2 = vids.filter(function(x){
      
         
 
-      <div class="youtubebox">
+      <div class="youtubebox-content">
       {#each displayedvids as vid}
 
          <iframe class='youtubebox' width="320" height="200"

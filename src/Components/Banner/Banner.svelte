@@ -13,13 +13,16 @@
 
       <div class="col" id="banner">
       <center>
-        <img src="images/rebreak.png" alt="" class="img-fluid" />"
+        <img src="images/rebreak.png" alt="" class="img-fluid" />
       </center>
       
       </div>
       
-    </div>
   </div>
+  <div class="banner-text">
+      <p>Bringing you a fresh take on local news and opinions</p>
+      
+    </div>
  
 </section>
 <!------------------------------------------->
@@ -41,6 +44,11 @@
     color: green;
   }
 
+p{
+  font-family: Arial, Helvetica, sans-serif;
+   text-align: center;
+   font-size:2em;
+}
   .watch-btn {
     margin: auto 20px;
     position: relative;
